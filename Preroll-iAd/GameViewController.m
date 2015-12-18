@@ -81,11 +81,7 @@
     
     //set up the ViewController
     self.prerollAdPlayer = [[AVPlayerViewController alloc] init];
-    //    AVPlayer *adPlayer = [[AVPlayer alloc] init];
-    //    self.prerollAdPlayer.player = adPlayer;
-    //    self.prerollAdPlayer.delegate = self;
-    //    self.prerollAdPlayer.showsPlaybackControls = NO;
-    self.prerollAdPlayer.view.userInteractionEnabled = false;
+    //self.prerollAdPlayer.showsPlaybackControls = false;
 }
 
 
