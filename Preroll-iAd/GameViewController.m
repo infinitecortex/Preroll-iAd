@@ -18,7 +18,6 @@
 @property (nonatomic, assign) NSInteger reserveLevel;
 //preroll iAd properties and controller
 @property (nonatomic, strong) AVPlayerViewController *prerollAdPlayer;
-@property (nonatomic, assign) BOOL completeAdPlayback;
 @end
 
 @implementation GameViewController
@@ -116,20 +115,24 @@
     [self presentViewController:reviveAlertController animated:YES completion:nil];
 }
 
+//method to play our video ad
 - (void) playVideoAd{
-    self.completeAdPlayback = false;
+    //present our ad AVViewController
     [self presentViewController:self.prerollAdPlayer animated:YES completion:^{
+        //Play the preroll ad
         [self.prerollAdPlayer playPrerollAdWithCompletionHandler:^(NSError *error) {
             if (error) {
+                //most likely error is we just didn't have an ad to play
                 NSLog(@"%@",error);
             }
             else {
-                //
+                //The ad started to play and didn't encounter an error so we give them their reward
                 [self refillReserves];
-                self.completeAdPlayback = true;
             }
+            //now we just have to dismiss our AVViewController to return to the game error or not.
             [self.prerollAdPlayer dismissViewControllerAnimated:YES completion:^{
-                if (!self.completeAdPlayback) {
+                if (error) {
+                    //if the ad was unable to play we alert the user
                     [self showAdPlayerErrorAlert];
                 }
             }];
