@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+@import iAd;
 
 @interface AppDelegate ()
 
@@ -17,6 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //Tell app to download a preroll ad from the iAd server so it is prepared to play
+    [AVPlayerViewController preparePrerollAds];
     return YES;
 }
 
